@@ -72,8 +72,6 @@ fn checkError() void {
             binding.INVALID_ENUM => "invalid enum",
             binding.INVALID_VALUE => "invalid value",
             binding.INVALID_OPERATION => "invalid operation",
-            binding.STACK_OVERFLOW => "stack overflow",
-            binding.STACK_UNDERFLOW => "stack underflow",
             binding.OUT_OF_MEMORY => "out of memory",
             binding.INVALID_FRAMEBUFFER_OPERATION => "invalid framebuffer operation",
             // binding.INVALID_FRAMEBUFFER_OPERATION_EXT => Error.InvalidFramebufferOperation,
@@ -401,7 +399,6 @@ pub const Type = enum(types.Enum) {
     byte = binding.BYTE,
     short = binding.SHORT,
     int = binding.INT,
-    fixed = binding.FIXED,
     float = binding.FLOAT,
     half_float = binding.HALF_FLOAT,
     double = binding.DOUBLE,
@@ -552,26 +549,16 @@ pub fn vertexArrayElementBuffer(vertexArray: types.VertexArray, buffer: types.Bu
 pub const BufferTarget = enum(types.Enum) {
     /// Vertex attributes
     array_buffer = binding.ARRAY_BUFFER,
-    /// Atomic counter storage
-    atomic_counter_buffer = binding.ATOMIC_COUNTER_BUFFER,
     /// Buffer copy source
     copy_read_buffer = binding.COPY_READ_BUFFER,
     /// Buffer copy destination
     copy_write_buffer = binding.COPY_WRITE_BUFFER,
-    /// Indirect compute dispatch commands
-    dispatch_indirect_buffer = binding.DISPATCH_INDIRECT_BUFFER,
-    /// Indirect command arguments
-    draw_indirect_buffer = binding.DRAW_INDIRECT_BUFFER,
     /// Vertex array indices
     element_array_buffer = binding.ELEMENT_ARRAY_BUFFER,
     /// Pixel read target
     pixel_pack_buffer = binding.PIXEL_PACK_BUFFER,
     /// Texture data source
     pixel_unpack_buffer = binding.PIXEL_UNPACK_BUFFER,
-    /// Query result buffer
-    query_buffer = binding.QUERY_BUFFER,
-    /// Read-write storage for shaders
-    shader_storage_buffer = binding.SHADER_STORAGE_BUFFER,
     /// Texture data buffer
     texture_buffer = binding.TEXTURE_BUFFER,
     /// Transform feedback buffer
@@ -849,10 +836,7 @@ pub fn copyBufferSubData(
 // Shaders
 
 pub const ShaderType = enum(types.Enum) {
-    compute = binding.COMPUTE_SHADER,
     vertex = binding.VERTEX_SHADER,
-    tess_control = binding.TESS_CONTROL_SHADER,
-    tess_evaluation = binding.TESS_EVALUATION_SHADER,
     geometry = binding.GEOMETRY_SHADER,
     fragment = binding.FRAGMENT_SHADER,
 };
@@ -961,17 +945,12 @@ pub const ProgramParameter = enum(types.Enum) {
     validate_status = binding.VALIDATE_STATUS,
     info_log_length = binding.INFO_LOG_LENGTH,
     attached_shaders = binding.ATTACHED_SHADERS,
-    active_atomic_counter_buffers = binding.ACTIVE_ATOMIC_COUNTER_BUFFERS,
     active_attributes = binding.ACTIVE_ATTRIBUTES,
     active_attribute_max_length = binding.ACTIVE_ATTRIBUTE_MAX_LENGTH,
     active_uniforms = binding.ACTIVE_UNIFORMS,
     active_uniform_blocks = binding.ACTIVE_UNIFORM_BLOCKS,
     active_uniform_block_max_name_length = binding.ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH,
     active_uniform_max_length = binding.ACTIVE_UNIFORM_MAX_LENGTH,
-    compute_work_group_size = binding.COMPUTE_WORK_GROUP_SIZE,
-    program_binary_length = binding.PROGRAM_BINARY_LENGTH,
-    program_binary_retrievable_hint = binding.PROGRAM_BINARY_RETRIEVABLE_HINT,
-    program_separable = binding.PROGRAM_SEPARABLE,
     transform_feedback_buffer_mode = binding.TRANSFORM_FEEDBACK_BUFFER_MODE,
     transform_feedback_varyings = binding.TRANSFORM_FEEDBACK_VARYINGS,
     transform_feedback_varying_max_length = binding.TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH,
@@ -1350,7 +1329,6 @@ pub const PrimitiveType = enum(types.Enum) {
     triangles = binding.TRIANGLES,
     triangle_strip_adjacency = binding.TRIANGLE_STRIP_ADJACENCY,
     triangles_adjacency = binding.TRIANGLES_ADJACENCY,
-    patches = binding.PATCHES,
 };
 
 pub fn drawArrays(primitiveType: PrimitiveType, first: usize, count: usize) void {
